@@ -14,54 +14,39 @@ public class TouchController : MonoBehaviour {
 		SetAngle (this.defaultAngle);
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.touchCount > 0) {
-			Touch touch = Input.GetTouch (0);
 
-			if (touch.position.x > Screen.width * 0.5f && tag == "RightFripperTag") {
-				SetAngle (this.flickAngle);
-			}
-			if (touch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag") {
-				SetAngle (this.flickAngle);
-			}
-			if (touch.position.x < Screen.width * 0.5f && tag == "RightFripperTag") {
-				SetAngle (this.defaultAngle);
-			}
-			if (touch.position.x > Screen.width * 0.5f && tag == "LeftFripperTag") {
-				SetAngle (this.defaultAngle);
-			}
 
-			/*if(touch.position.x > Screen.width * 0.5f && tag =="RightFripperTag"){
+		if(Input.touchCount > 0){
+
+
+
+			for (int i = 0; i < Input.touchCount; i++) {
+				Touch touch = Input.GetTouch (i);
+				Touch[] myTouches = Input.touches;
+		
 				
+			if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width * 0.5f && tag == "RightFripperTag") {
 				SetAngle (this.flickAngle);
+			}
+			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag") {
+				SetAngle (this.flickAngle);
+				}
 
-			}else{
-
+			if (touch.phase == TouchPhase.Ended) {
 				SetAngle (this.defaultAngle);
-
 			}
 
-			if (touch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag") {
 
-				SetAngle (this.flickAngle);
 
-			}
-			else{
-
-				SetAngle (this.defaultAngle);
-			    
-			}*/
-
-		} else {
-
-			SetAngle (this.defaultAngle);
-
-		}
 
 	}
+	}
+	}
+
 
 	public void SetAngle (float angle){
 		JointSpring jointSpr = this.myHingeJoint.spring;
